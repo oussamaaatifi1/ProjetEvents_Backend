@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById((long) Math.toIntExact(id)).orElse(null);
+        return userRepository.findById(id).orElse(null);
     }
 
     public User createUser(User user) {
@@ -26,9 +26,9 @@ public class UserService {
     }
 
     public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById((long) Math.toIntExact(id)).orElse(null);
+        User existingUser = userRepository.findById(id).orElse(null);
         if (existingUser != null) {
-            existingUser.setUsername(user.getUsername());
+            existingUser.setFullName(user.getFullName());
             existingUser.setPassword(user.getPassword());
             existingUser.setEmail(user.getEmail());
             return userRepository.save(existingUser);
@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        userRepository.deleteById((long) Math.toIntExact(id));
+        userRepository.deleteById(id);
     }
 }
 
