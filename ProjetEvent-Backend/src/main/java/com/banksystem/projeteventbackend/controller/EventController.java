@@ -4,12 +4,13 @@ import com.banksystem.projeteventbackend.model.Event;
 import com.banksystem.projeteventbackend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/events")
+@RequestMapping("/api/v1/auth/Admin/events")
 public class EventController {
 
     private final EventService eventService;
@@ -34,7 +35,8 @@ public class EventController {
         }
     }
 
-    @PostMapping("/add")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event createdEvent = eventService.createEvent(event);
         return ResponseEntity.ok(createdEvent);

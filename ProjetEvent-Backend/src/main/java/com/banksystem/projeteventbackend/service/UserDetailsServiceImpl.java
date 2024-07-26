@@ -41,7 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public AuthResponse register(RegisterRequest request) {
         var user = User.builder()
-                .fullName(request.getFullName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
@@ -71,7 +70,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public AuthResponse registerAdmin(RegisterRequest request) {
         var user = User.builder()
-                .fullName(request.getFullName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.ADMIN)
