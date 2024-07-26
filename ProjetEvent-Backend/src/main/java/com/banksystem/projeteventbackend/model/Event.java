@@ -14,7 +14,12 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+<<<<<<< HEAD
 
+=======
+@Getter
+@Setter
+>>>>>>> e871d4a844ec7408633a60ba80920134cc684f49
 public class Event {
 
     @Id
@@ -26,6 +31,7 @@ public class Event {
     private String category;
     private Double price;
 
+<<<<<<< HEAD
     public Long getIdEvent() {
         return idEvent;
     }
@@ -74,3 +80,7 @@ public class Event {
         this.price = price;
     }
 }
+=======
+
+}
+>>>>>>> e871d4a844ec7408633a60ba80920134cc684f49

@@ -15,8 +15,15 @@ public class Contact {
     private String email;
     private String message;
 
+<<<<<<< HEAD
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 }
+=======
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+}
+>>>>>>> e871d4a844ec7408633a60ba80920134cc684f49
