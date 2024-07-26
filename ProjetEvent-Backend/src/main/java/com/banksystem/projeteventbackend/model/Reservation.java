@@ -6,16 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Contact {
+import java.util.Date;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id ;
-    private String name;
-    private String email;
-    private String message;
+    private Long idReservation;
+    private Date reservationDate;
+    private int numTickets;
+    private String status;
+
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name="event_id", nullable=false)
+    private Event event;
 }
