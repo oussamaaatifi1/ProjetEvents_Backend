@@ -4,45 +4,42 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.Set;
 
-@Entity
+import java.util.Collection;
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Admin implements UserDetails {
+@Entity
+@Table(name = "Utilisateur")
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String userName;
+    private int id;
+
+    private String fullName;
+
+    private String username;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ElementCollection
-    private Set<GrantedAuthority> authorities;
-
-    // Getters and Setters
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
+        return List.of(role); // Ensure Role implements GrantedAuthority
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
+    // Customize these methods if needed
     @Override
     public boolean isAccountNonExpired() {
         return true;

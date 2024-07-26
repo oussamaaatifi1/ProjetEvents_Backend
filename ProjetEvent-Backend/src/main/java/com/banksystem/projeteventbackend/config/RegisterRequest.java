@@ -1,14 +1,18 @@
 package com.banksystem.projeteventbackend.config;
 
-import com.banksystem.projeteventbackend.model.Role;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterRequest {
-    private String nom;
-    private String username;
-    private String password;
-    private Role role;
+
+    private String fullName ;
+    private String username ;
+    private String password ;
+
 }
