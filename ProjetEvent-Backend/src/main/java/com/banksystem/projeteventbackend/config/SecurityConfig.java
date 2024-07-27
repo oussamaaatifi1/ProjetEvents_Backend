@@ -38,9 +38,9 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/v1/auth/register", "/api/v1/auth/register-admin", "/api/v1/auth/authenticate-admin").permitAll()
-                                .requestMatchers("/api/v1/auth/User/").hasAuthority("USER")
-                                .requestMatchers("/api/v1/auth/Admin/").hasAuthority("ADMIN")
+                                .requestMatchers("/api/auth/register", "/api/auth/register-admin", "/api/auth/authenticate-admin","/api/auth/authenticate").permitAll()
+                                .requestMatchers("/api/auth/User/").hasAuthority("USER")
+                                .requestMatchers("/api/auth/Admin/").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 );
 
