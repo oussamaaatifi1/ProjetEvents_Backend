@@ -34,15 +34,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findUserByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
     }
 
     public AuthResponse register(RegisterRequest request) {
         var user = User.builder()
-                .fullName(request.getFullName())
-                .email(request.getEmail())
+                .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
@@ -56,12 +55,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public AuthResponse authenticate(AuthRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
-        var user = userRepository.findUserByEmail(request.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+        var user = userRepository.findUserByUsername(request.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getUsername()));
         var jwtToken = jwtService.generateToken(user);
 
         return AuthResponse.builder()
@@ -71,8 +70,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public AuthResponse registerAdmin(RegisterRequest request) {
         var user = User.builder()
-                .fullName(request.getFullName())
-                .email(request.getEmail())
+                .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.ADMIN)
                 .build();
@@ -86,12 +84,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public AuthResponse authenticateAdmin(AuthRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
-        var user = userRepository.findUserByEmail(request.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+        var user = userRepository.findUserByUsername(request.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getUsername()));
         var jwtToken = jwtService.generateToken(user);
 
         return AuthResponse.builder()
