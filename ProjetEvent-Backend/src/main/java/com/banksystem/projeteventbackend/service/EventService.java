@@ -42,4 +42,7 @@ public class EventService {
             return true;
         }).orElse(false);
     }
+    public Long countEvents() {
+        return  eventRepository.countEvents();
+    }
 }

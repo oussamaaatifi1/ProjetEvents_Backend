@@ -96,4 +96,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .accessToken(jwtToken)
                 .build();
     }
+    public Long countUsers() {
+        return  userRepository.countUsers();
+    }
 }
