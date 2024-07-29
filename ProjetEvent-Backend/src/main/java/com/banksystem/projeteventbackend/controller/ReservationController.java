@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reservations")
+@RequestMapping("/api/auth/User/reservations")
 public class ReservationController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class ReservationController {
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         Reservation createdReservation = reservationService.createReservation(reservation);
         return ResponseEntity.ok(createdReservation);
